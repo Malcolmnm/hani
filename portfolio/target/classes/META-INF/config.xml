@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-config.dtd">
+	<!-- Database 필드에 대한 값을 vo(setter) 로드 하는 역할 -->
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Noticevo" type="admin.noticevo"/>
+		<typeAlias alias="Noticevo2" type="admin.memberlog"/>
+		<typeAlias alias="Noticevo3" type="admin.writelist"/>
+		<typeAlias alias="Noticevo4" type="admin.shopvo"/>
+	</typeAliases>
+</configuration>

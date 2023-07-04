@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace sql 문법에 대한 그룹명
+	id값은 중복되면 안됨 <select>,<insert>,<update>,<delete>
+	
+	${} : 필드명, 테이블명
+	#{} : 값 bbb = "홍길동" ;
+	
+	Databse 문법 외에는 사용하지 않습니다.
+	
+	parameterType : string, int, double
+	resultType : 데이터 값을 받아올때 사용하는 형태(select 태그만 사용)
+ -->
+<mapper namespace="noticeDB">
+	<select id="select1" parameterType="string" resultType="Noticevo">
+		select * from notice where nidx =#{value}
+	</select>
+	<select id="select2" parameterType="string" resultType="Noticevo">
+		select * from userlogin where usuc='D' order by udate desc
+	</select>
+	<update id="okupdate">
+		update userlogin set usuc='Y' where uid=#{uid}
+	</update>
+	<update id="noupdate">
+		update userlogin set usuc='N' where uid=#{uid}
+	</update>
+	<select id="membersel" parameterType="string" resultType="Noticevo2">
+		select * from memberlogin
+	</select>
+	<select id="membersel2" parameterType="integer" resultType="Noticevo2">
+		select * from memberlogin limit #{page},4
+	</select>	
+	<select id="membersel3" parameterType="string" resultType="Noticevo2">
+		select * from memberlogin where midx=#{midx}
+	</select>
+	<delete id="memberdel" parameterType="string">
+		delete from memberlogin where mid=#{sid}
+	</delete>
+	<insert id="writein">
+		insert into noticelist (nidx,nsub,nname,nfile,ntext,nview,nsel,ndate) values ('0',#{nsub},#{nname},#{nfile},#{ntext},#{nview},#{nsel},default)
+	</insert>
+	<select id="writesel1" parameterType="string" resultType="Noticevo3">
+		select * from noticelist
+	</select>
+	<select id="writesel2" parameterType="integer" resultType="Noticevo3">
+		select * from noticelist where nsel = 'Y' order by ndate desc  limit #{page},8 
+	</select>
+	<select id="writesel3" parameterType="integer" resultType="Noticevo3">
+		select * from noticelist where nsel = 'N' order by ndate desc  limit 0,#{page} 
+	</select>
+	<select id="writesel4" parameterType="integer" resultType="Noticevo3">
+		select * from noticelist where nsel = 'N' order by ndate desc  limit #{page},8 
+	</select>
+	<select id="writesel5" parameterType="integer" resultType="Noticevo3">
+		select * from noticelist where nsel = 'Y' order by ndate desc 
+	</select>
+	<delete id="writedel" parameterType="string">
+		delete from noticelist where nsub=#{nsub}
+	</delete>
+	<select id="writeview" parameterType="string" resultType="Noticevo3">
+		select * from noticelist where nidx=#{nidx}
+	</select>
+	<update id="writeupdate">
+		update noticelist set ntext=#{ntext} where nidx=#{nidx}
+	</update>
+	<delete id="writedelete">
+		delete from noticelist where nsub=#{nsub}
+	</delete>
+	<update id="modifyupdate">
+		update memberlogin set mlevel=#{mlevel}, mpoint=#{mpoint}, mrest=#{mrest} where midx=#{midx}
+	</update>
+	<insert id="shop_insert">
+		insert into shopproduct (sidx,smenu1,smenu2,scode,sname,stext1,ssel,sdis,sdissel,scon,scan,ssold,sfile1,sfile2,sfile3,smfile1,smfile2,smfile3,stext2) values ('0',#{sidx},#{smenu1},#{smenu2},#{scode},#{sname},#{stext1},#{ssel},#{sdis},#{sdissel},#{scon},#{scan},#{ssold},#{sfile1},#{sfile2},#{sfile3},#{smfile1},#{smfile2},#{smfile3},#{stext2})
+	</insert>
+</mapper>
